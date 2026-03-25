@@ -1,22 +1,16 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './hooks/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  // Enable class-based dark mode (toggled by adding 'dark' to <html>)
-  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-      },
-      colors: {
-        accent: '#6366F1',
-        'accent-hover': '#4F46E5',
+        sans: ['Inter', 'sans-serif'],
       },
       keyframes: {
         slideInFromTop: {
@@ -35,6 +29,5 @@ const config: Config = {
     },
   },
   plugins: [],
-};
-
-export default config;
+}
+export default config

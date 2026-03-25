@@ -1,10 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================
-   CSS Variables — Design Tokens
-   ============================================ */
 :root {
   --bg-base: #F9FAFB;
   --bg-card: #FFFFFF;
@@ -25,33 +23,17 @@
   --text-primary: #F1F5F9;
   --text-secondary: #94A3B8;
   --text-muted: #64748B;
-  --accent: #6366F1;
-  --accent-hover: #818CF8;
+  --accent: #818CF8;
+  --accent-hover: #6366F1;
 }
 
-/* ============================================
-   Base styles
-   ============================================ */
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+
+html { transition: color 150ms ease, background-color 150ms ease; }
 
 body {
-  font-family: var(--font-inter), sans-serif;
   background-color: var(--bg-base);
   color: var(--text-primary);
-  transition: background-color 0.2s, color 0.2s;
-}
-
-/* Smooth date input styling */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-/* Remove number input spinners */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
 }
