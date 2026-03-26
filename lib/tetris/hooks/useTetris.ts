@@ -126,24 +126,27 @@ function reducer(state: GameState, action: Action): GameState {
   if (action.type === 'HOLD') {
     if (state.holdUsed) return state
     if (!state.holdPiece) {
-      const { piece: nextType, bag } = drawFromBag(state.bag)
-      return spawnNext({
-        ...state,
-        holdPiece: piece.type,
-        nextPiece: nextType,
-        bag,
-        holdUsed: true,
-        currentPiece: null,
-      })
+      // Hold is empty: stash current piece, spawn original nextPiece, draw new next from bag.
+      // spawnNext uses state.nextPiece (unchanged) and draws from state.bag.
+      const result = spawnNext({ ...state, holdPiece: piece.type, currentPiece: null })
+      // spawnNext resets holdUsed to false; override to true so the player can't hold again
+      // until the newly spawned piece is placed.
+      return { ...result, holdUsed: true }
     }
+    // Swap: held piece spawns immediately; next/bag stay exactly as-is.
     const held = state.holdPiece
-    return spawnNext({
+    const swappedIn = spawnPiece(held)
+    if (!isValidPosition(state.board, swappedIn)) {
+      const newHigh = Math.max(state.score, state.highScore)
+      if (newHigh > state.highScore) saveHighScore(newHigh)
+      return { ...state, gameStatus: 'GAME_OVER', highScore: newHigh, currentPiece: null }
+    }
+    return {
       ...state,
       holdPiece: piece.type,
-      nextPiece: held,
+      currentPiece: swappedIn,
       holdUsed: true,
-      currentPiece: null,
-    })
+    }
   }
 
   if (action.type === 'GRAVITY_TICK') {
