@@ -37,3 +37,19 @@ body {
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
 }
+
+/* === TETRIS ADDITIONS === */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes scoreFlash {
+  0%, 100% { color: #F0F000; }
+  50% { color: #ffffff; text-shadow: 0 0 10px #ffffff; }
+}
+
+.blink-text { animation: blink 1s step-end infinite; }
+.score-flash { animation: scoreFlash 0.3s ease-in-out 3; }
